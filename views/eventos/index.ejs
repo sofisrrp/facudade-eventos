@@ -1,0 +1,36 @@
+
+<%- include('../partials/header') %>
+
+<section class="apresentacao">
+  <div class="apresentacao-conteudo">
+
+    <% if (usuario) { %>
+      <p class="saudacao-perfil">
+        Olá, <%= usuario.nome %>
+        (<%= usuario.perfil === 'organizador' ? 'Organizador' : 'Aluno' %>)
+      </p>
+    <% } %>
+
+    <span class="destaque">EVENTOS DO CAMPUS</span>
+
+    <h1>Conecte-se a novas experiências.</h1>
+
+    <h2>Descubra. Aprenda. Participe.</h2>
+
+    <p>
+      Encontre palestras, cursos e oficinas que ampliam seus conhecimentos
+      e aproximam você de novas oportunidades.
+    </p>
+
+    <a href="#eventos" class="botao-apresentacao">
+      Explore os eventos
+    </a>
+
+  </div>
+</section>
+
+<section id="eventos" class="secao-eventos">
+  <%- include('lista-cards', { titulo: 'Próximos eventos' }) %>
+</section>
+
+<%- include('../partials/footer') %>

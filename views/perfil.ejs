@@ -1,0 +1,74 @@
+
+<%- include('partials/header') %>
+
+<section class="perfil-container">
+  <h1>Meu perfil</h1>
+  <p>Consulte e atualize as informações da sua conta.</p>
+
+  <% if (erro) { %>
+    <p class="mensagem-erro"><%= erro %></p>
+  <% } %>
+
+  <% if (sucesso) { %>
+    <p class="mensagem-sucesso"><%= sucesso %></p>
+  <% } %>
+
+  <form method="POST" action="/perfil">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label>Nome</label>
+    <input
+      type="text"
+      name="nome"
+      value="<%= usuario.nome %>"
+      required
+    >
+
+    <label>E-mail</label>
+    <input
+      type="email"
+      name="email"
+      value="<%= usuario.email %>"
+      required
+    >
+
+    <label>Tipo de conta</label>
+    <input
+      type="text"
+      value="<%= usuario.perfil === 'organizador' ? 'Organizador' : 'Aluno' %>"
+      disabled
+    >
+
+    <% if (usuario.id_institucional) { %>
+      <label>ID institucional</label>
+      <input
+        type="text"
+        value="<%= usuario.id_institucional %>"
+        disabled
+      >
+    <% } %>
+
+    <h2>Alterar senha</h2>
+    <p>Deixe os campos abaixo vazios se não quiser alterar sua senha.</p>
+
+    <label>Nova senha</label>
+    <input
+      type="password"
+      name="senha"
+      autocomplete="new-password"
+    >
+
+    <label>Confirmar nova senha</label>
+    <input
+      type="password"
+      name="confirmar_senha"
+      autocomplete="new-password"
+    >
+
+    <button type="submit">Salvar alterações</button>
+  </form>
+
+  <a href="/">Voltar aos eventos</a>
+</section>
+
+<%- include('partials/footer') %>

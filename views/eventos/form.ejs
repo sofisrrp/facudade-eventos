@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<div class="pequeno">
+  <h1><%= titulo %></h1>
+  <% if (erro) { %><p class="erro"><%= erro %></p><% } %>
+
+  <!-- "acao" muda: /eventos para criar, /eventos/3/editar para editar -->
+  <form method="POST" action="<%= acao %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Título <input name="titulo" value="<%= evento.titulo || '' %>" required maxlength="150"></label>
+
+    <label>Tipo
+      <select name="tipo_id" required>
+        <option value="">Escolha...</option>
+        <!-- Cria uma opção para cada tipo do banco -->
+        <% tipos.forEach((t) => { %>
+          <option value="<%= t.id %>" <%= t.id == evento.tipo_id ? 'selected' : '' %>><%= t.nome %></option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>Data <input type="date" name="data_evento" value="<%= evento.data_evento || '' %>" required></label>
+    <label>Local <input name="local" value="<%= evento.local || '' %>" maxlength="100"></label>
+    <label>Descrição <textarea name="descricao" rows="4" maxlength="60000"><%= evento.descricao || '' %></textarea></label>
+    <button>Salvar</button> <a href="/">Cancelar</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

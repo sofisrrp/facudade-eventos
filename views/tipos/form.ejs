@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+<div class="pequeno">
+  <h1>Editar tipo</h1>
+  <% if (erro) { %><p class="erro"><%= erro %></p><% } %>
+  <form method="POST" action="/tipos/<%= tipo.id %>/editar">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Nome <input name="nome" value="<%= tipo.nome %>" required maxlength="50"></label>
+    <button>Salvar</button> <a href="/tipos">Cancelar</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

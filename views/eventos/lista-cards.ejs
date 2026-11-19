@@ -1,0 +1,25 @@
+
+<h1><%= titulo %></h1>
+
+<% if (typeof descricao !== 'undefined' && descricao) { %>
+  <p><%= descricao %></p>
+<% } %>
+
+<div class="filtros-eventos">
+  <input
+    id="busca"
+    type="search"
+    placeholder="Buscar por título ou tipo (Palestra, Curso, Oficina)..."
+  >
+
+  <% if (usuario && usuario.perfil === 'aluno') { %>
+    <button id="filtro-favoritos" type="button" aria-pressed="false">
+  <span class="icone-favoritos">☆</span>
+  <span>Favoritos</span>
+</button>
+  <% } %>
+</div>
+
+<div id="lista" class="grade">Carregando...</div>
+
+<script src="/js/site.js"></script>

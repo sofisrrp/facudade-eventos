@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<h1>Inscritos: <%= evento.titulo %></h1>
+
+<% if (inscritos.length === 0) { %>
+  <p>Ninguém se inscreveu ainda.</p>
+<% } else { %>
+  <p>Total: <strong><%= inscritos.length %></strong></p>
+  <table>
+    <tr><th>Nome</th><th>E-mail</th><th>Inscrito em</th></tr>
+    <% inscritos.forEach((i) => { %>
+      <tr>
+        <td><%= i.nome %></td>
+        <td><%= i.email %></td>
+        <td><%= String(i.data_inscricao).slice(0, 16) %></td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
+<p><a href="/eventos/organizador">← Voltar para Meus eventos</a></p>
+<%- include('../partials/footer') %>

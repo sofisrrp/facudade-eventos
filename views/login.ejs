@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<div class="pequeno">
+  <h1>Entrar</h1>
+  <!-- Só mostra a mensagem se houver erro -->
+  <% if (erro) { %><p class="erro"><%= erro %></p><% } %>
+  <form method="POST" action="/login">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Entrar como
+      <select name="perfil" id="perfil" required>
+        <option value="aluno" <%= perfilSelecionado === 'aluno' ? 'selected' : '' %>>Aluno</option>
+        <option value="organizador" <%= perfilSelecionado === 'organizador' ? 'selected' : '' %>>Organizador</option>
+      </select>
+    </label>
+    <label>E-mail <input type="email" name="email" required autocomplete="username"></label>
+    <label>Senha <input type="password" name="senha" required maxlength="72" autocomplete="current-password"></label>
+    <label id="campo-id-institucional" hidden>ID institucional
+      <input type="text" name="id_institucional" id="id_institucional" maxlength="80" autocomplete="off">
+    </label>
+    <button>Entrar</button>
+  </form>
+  <p>Não tem conta de aluno? <a href="/registro">Cadastre-se</a></p>
+</div>
+<script>
+  const perfil = document.querySelector("#perfil");
+  const campoId = document.querySelector("#campo-id-institucional");
+  const idInstitucional = document.querySelector("#id_institucional");
+  function atualizarCampoId() {
+    const organizador = perfil.value === "organizador";
+    campoId.hidden = !organizador;
+    idInstitucional.required = organizador;
+  }
+  perfil.addEventListener("change", atualizarCampoId);
+  atualizarCampoId();
+</script>
+<%- include('partials/footer') %>

@@ -1,0 +1,5 @@
+# Pastas e arquivos que NÃO vão para o GitHub
+node_modules/
+.env
+tmp/
+.superpowers/

@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+<div class="pequeno">
+
+  <!-- Tipo do evento (Palestra, Curso ou Oficina) -->
+  <span class="tag"><%= evento.tipo %></span>
+
+  <h1><%= evento.titulo %></h1>
+
+  <!-- A data vem como 2026-12-02. Aqui viramos 02/12/2026 -->
+  <p><strong>Data:</strong> <%= evento.data_evento.split("-").reverse().join("/") %></p>
+
+  <!-- Se não tiver local ou descrição, mostra um texto padrão -->
+  <p><strong>Local:</strong> <%= evento.local || "A definir" %></p>
+  <p><strong>Descrição:</strong> <%= evento.descricao || "Sem descrição." %></p>
+
+  <p><small>Organizador: <%= evento.organizador %></small></p>
+
+  <!-- Só o dono do evento vê o botão Editar -->
+  <% if (usuario && usuario.id === evento.usuario_id) { %>
+    <p><a href="/eventos/<%= evento.id %>/editar">Editar evento</a></p>
+  <% } %>
+
+  <a href="/">← Voltar para a lista</a>
+</div>
+<%- include('../partials/footer') %>

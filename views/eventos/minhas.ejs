@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<h1>Minhas inscrições</h1>
+
+<% if (eventos.length === 0) { %>
+  <p>Você ainda não se inscreveu em nenhum evento. <a href="/">Ver eventos</a></p>
+<% } else { %>
+  <table>
+    <tr><th>Evento</th><th>Tipo</th><th>Data</th><th>Local</th><th></th></tr>
+    <% eventos.forEach((e) => { %>
+      <tr>
+        <td><%= e.titulo %></td>
+        <td><%= e.tipo %></td>
+        <td><%= e.data_evento.split("-").reverse().join("/") %></td>
+        <td><%= e.local || "A definir" %></td>
+        <td>
+          <form method="POST" action="/eventos/<%= e.id %>/cancelar"
+                onsubmit="return confirm('Cancelar a inscrição?')">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="link perigo">Cancelar inscrição</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
+<%- include('../partials/footer') %>

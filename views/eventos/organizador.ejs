@@ -1,0 +1,74 @@
+<%- include('../partials/header') %>
+
+<section class="secao-eventos">
+
+  <div class="cabecalho-meus-eventos">
+  <div>
+    <h1>Meus eventos</h1>
+    <p>Gerencie os eventos que você cadastrou.</p>
+  </div>
+
+  <div class="acoes-painel">
+    <a class="botao-apresentacao" href="/">
+      ← Página inicial
+    </a>
+
+    <a class="botao-apresentacao" href="/eventos/novo">
+      + Novo evento
+    </a>
+  </div>
+</div>
+
+  <% if (eventos.length === 0) { %>
+
+    <div class="card">
+      <h3>Você ainda não cadastrou eventos.</h3>
+      <p>Comece cadastrando seu primeiro evento!</p>
+      <a href="/eventos/novo">Cadastrar evento</a>
+    </div>
+
+  <% } else { %>
+
+    <div class="grade">
+
+      <% eventos.forEach(evento => { %>
+
+        <article class="card">
+
+          <span class="tag"><%= evento.tipo %></span>
+
+          <h3><%= evento.titulo %></h3>
+
+          <p><%= evento.descricao %></p>
+
+          <p>
+            <strong>Data:</strong>
+            <%= new Date(evento.data_evento).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) %>
+          </p>
+
+          <p>
+            <strong>Local:</strong>
+            <%= evento.local %>
+          </p>
+
+          <p>
+            <strong>Inscritos:</strong>
+            <%= evento.total_inscritos || 0 %>
+          </p>
+
+          <div class="acoes-evento">
+            <a href="/eventos/<%= evento.id %>/editar">Editar</a>
+            <a href="/eventos/<%= evento.id %>/inscritos">Ver inscritos</a>
+          </div>
+
+        </article>
+
+      <% }) %>
+
+    </div>
+
+  <% } %>
+
+</section>
+
+<%- include('../partials/footer') %>

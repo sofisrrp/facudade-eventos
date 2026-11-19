@@ -1,0 +1,92 @@
+
+<%- include('partials/header') %>
+
+<div class="pequeno">
+  <h1>Criar conta</h1>
+
+  <% if (erro) { %>
+    <p class="erro"><%= erro %></p>
+  <% } %>
+
+  <% if (sucesso) { %>
+    <p class="sucesso"><%= sucesso %></p>
+
+    <% if (idInstitucional) { %>
+      <div class="id-gerado">
+        <strong>Seu ID institucional:</strong>
+        <h2><%= idInstitucional %></h2>
+        <p>Guarde esse número para utilizar no login.</p>
+      </div>
+    <% } %>
+
+    <p><a href="/login">Ir para o login</a></p>
+
+  <% } else { %>
+
+    <p>Preencha seus dados para criar sua conta.</p>
+
+    <form method="POST" action="/registro">
+
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+      <label>
+        Tipo de conta
+        <select name="perfil" id="perfil" required>
+          <option value="aluno">Aluno</option>
+          <option value="organizador">Organizador</option>
+        </select>
+      </label>
+
+      <label>
+        Nome completo
+        <input name="nome" required maxlength="100">
+      </label>
+
+      <label>
+        E-mail
+        <input type="email" name="email" required>
+      </label>
+
+      <label>
+        Senha
+        <input type="password" name="senha" required minlength="10"
+          maxlength="72" autocomplete="new-password">
+      </label>
+
+      <label id="campo-codigo" hidden>
+        Código de autorização
+        <input type="password" name="codigo_autorizacao"
+          id="codigo_autorizacao" autocomplete="off">
+      </label>
+
+      <button type="submit">Criar conta</button>
+    </form>
+
+    <p>Já tem conta? <a href="/login">Entrar</a></p>
+
+  <% } %>
+</div>
+
+<script>
+  const perfil = document.getElementById("perfil");
+  const campoCodigo = document.getElementById("campo-codigo");
+  const codigo = document.getElementById("codigo_autorizacao");
+
+  if (perfil) {
+    function atualizarCadastro() {
+      const organizador = perfil.value === "organizador";
+
+      campoCodigo.hidden = !organizador;
+      codigo.required = organizador;
+
+      if (!organizador) {
+        codigo.value = "";
+      }
+    }
+
+    perfil.addEventListener("change", atualizarCadastro);
+    atualizarCadastro();
+  }
+</script>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<h1>Tipos de evento</h1>
+<% if (erro) { %><p class="erro"><%= erro %></p><% } %>
+
+<!-- Formulário para adicionar um tipo -->
+<form method="POST" action="/tipos" class="linha">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <input name="nome" placeholder="Novo tipo (ex.: Workshop)" required maxlength="50">
+  <button>Adicionar</button>
+</form>
+
+<table>
+  <tr><th>Nome</th><th>Ações</th></tr>
+  <!-- Uma linha da tabela para cada tipo -->
+  <% tipos.forEach((t) => { %>
+    <tr>
+      <td><%= t.nome %></td>
+      <td class="linha">
+        <a href="/tipos/<%= t.id %>/editar">Editar</a>
+        <!-- confirm() pergunta "Tem certeza?" antes de enviar -->
+        <form method="POST" action="/tipos/<%= t.id %>/excluir" onsubmit="return confirm('Excluir este tipo?')">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="link perigo">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+<%- include('../partials/footer') %>

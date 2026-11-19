@@ -1,0 +1,41 @@
+<!-- CABEÇALHO: aparece em todas as páginas -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="<%= csrfToken %>">
+  <title>Eventos da Faculdade</title>
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<!-- data-usuario-id e data-perfil guardam quem está logado, para o JavaScript usar -->
+<body data-usuario-id="<%= usuario ? usuario.id : '' %>" data-perfil="<%= usuario ? usuario.perfil : '' %>">
+<header>
+  <a class="logo" href="/">Eventos do Campus</a>
+  <nav>
+    <% if (usuario) { %>
+      <% if (usuario.perfil === 'organizador') { %>
+        <!-- Menu do ORGANIZADOR -->
+        <a href="/">Página inicial</a>
+        <a href="/eventos/organizador">Meus eventos</a>
+        <a href="/eventos/novo">Novo evento</a>
+        <a href="/tipos">Tipos</a>
+        
+      <% } else { %>
+        <!-- Menu do ALUNO -->
+        <a href="/">Eventos</a>
+        <a href="/eventos/minhas">Minhas inscrições</a>
+      <% } %>
+     <a href="/perfil">Perfil</a>
+      <form method="POST" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="link">Sair</button>
+      </form>
+    <% } else { %>
+      <a href="/">Início</a>
+      <a href="/login">Entrar</a>
+      <a href="/registro">Cadastrar</a>
+    <% } %>
+  </nav>
+</header>
+<main>
