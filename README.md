@@ -183,8 +183,8 @@ erDiagram
 
 ## Uso de inteligência artificial
 
-IA generativa foi usada como apoio na implementação dos modelos Sequelize, na documentação e na revisão de segurança. A estudante deve revisar as mudanças e saber explicar o código na apresentação.
+IA generativa foi usada como apoio na implementação dos modelos Sequelize, na documentação e na revisão de segurança.
 
 ## Git e histórico de desenvolvimento
 
-Este é um projeto individual. O repositório pessoal no GitHub registra o histórico de desenvolvimento, e os commits devem ficar associados à conta da estudante. `.env` e `node_modules/` permanecem fora do repositório; compartilhe apenas `.env.exemplo`, sem valores secretos.
+Este projeto foi desenvolvido em grupo, com a participação de Julia Maria e Maria Luiza. Conforme orientação do professor, uma integrante é responsável por publicar o repositório no GitHub. O histórico publicado fica associado à conta usada para enviar os commits, mas o trabalho foi realizado em colaboração. `.env` e `node_modules/` permanecem fora do repositório; compartilhe apenas `.env.exemplo`, sem valores secretos.
